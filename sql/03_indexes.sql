@@ -1,0 +1,10 @@
+CREATE INDEX IF NOT EXISTS idx_fs_skill      ON freelancer_skills(skill_id, proficiency DESC);
+CREATE INDEX IF NOT EXISTS idx_rel_parent    ON skill_relations(parent_id);
+CREATE INDEX IF NOT EXISTS idx_ps_skill      ON project_skills(skill_id);
+CREATE INDEX IF NOT EXISTS idx_proposals_prj ON proposals(project_id);
+CREATE INDEX IF NOT EXISTS idx_projects_open ON projects(created_at DESC) WHERE status = 'open';
+CREATE INDEX IF NOT EXISTS idx_users_avail   ON users(rating DESC) WHERE role = 'freelancer' AND available;
+CREATE INDEX IF NOT EXISTS idx_ledger_ms     ON ledger_entries(milestone_id);
+CREATE INDEX IF NOT EXISTS idx_ledger_wallet ON ledger_entries(wallet_id);
+CREATE INDEX IF NOT EXISTS idx_users_hnsw    ON users USING hnsw (bio_embedding vector_cosine_ops) WHERE role = 'freelancer';
+CREATE INDEX IF NOT EXISTS idx_projects_hnsw ON projects USING hnsw (desc_embedding vector_cosine_ops);

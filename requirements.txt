@@ -1,0 +1,6 @@
+psycopg2-binary
+numpy
+pandas
+faker
+streamlit
+sentence-transformers   # optional: without it a hashing-embedding fallback is used
